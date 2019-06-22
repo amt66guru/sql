@@ -4,8 +4,7 @@
 	Desc:	Changes the owner of the database from the current owner to an new owner set by the value 
 			in the @NewOwner variable.  If it comes across a database it can't write to it will stop
 			and exit reporting the name of the database it couldn't write to. The exception to this 
-			behaviour is read only databases which are excluded from 
-			the cursor.
+			behaviour is read only databases which are excluded from the cursor.
 */
 
 DECLARE @DbName sysname
@@ -15,8 +14,8 @@ DECLARE @NewOwner nvarchar(50) = 'sa'
 
  DROP TABLE IF EXISTS #RESULTS1
  DROP TABLE IF EXISTS #RESULTS2
--- Check if there are any databases that can't be written to and insert to temp table for report at end
 
+-- Check if there are any databases that can't be written to and insert to temp table for report at end
 SELECT 'Database owner not changed' as Col1,NAME as Col2, state_desc as Col3, CASE WHEN is_read_only = 1 THEN 'Read Only' END AS Col4 INTO #Results1 
 FROM SYS.databases
 WHERE state <> 0 OR is_read_only = 1
@@ -58,7 +57,7 @@ END CATCH
 CLOSE Amt_Cur
 DEALLOCATE Amt_Cur
 
--- NEED TO FIX THIS SO THAT IT OUTPUTS A LIST OF WHAT IT HAS DONE
+-- NEED TO WORK ON THIS SO THAT IT OUTPUTS A LIST OF WHAT IT HAS DONE
 IF OBJECT_ID('TEMPDB.#Results1') IS NOT NULL SELECT * FROM #Results1
 
 IF OBJECT_ID('TEMPDB.#Results2') IS NOT NULL SELECT * FROM #Results2
