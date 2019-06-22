@@ -57,7 +57,7 @@ END CATCH
 CLOSE Amt_Cur
 DEALLOCATE Amt_Cur
 
--- NEED TO WORK ON THIS SO THAT IT OUTPUTS A LIST OF WHAT IT HAS DONE
+-- Need to work on this so that it outputs a list of what it has done
 IF OBJECT_ID('TEMPDB.#Results1') IS NOT NULL SELECT * FROM #Results1
 
 IF OBJECT_ID('TEMPDB.#Results2') IS NOT NULL SELECT * FROM #Results2
